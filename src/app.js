@@ -1,5 +1,5 @@
 import express from 'express';
-import { app } from './firebase.config.js';
+import { app } from '../lib/firebase.js';
 
 const routes = express();
 
