@@ -1,8 +1,8 @@
 import app from './app.js';
-const port = 3333;
+const PORT = 3333;
 
-app.listen(port, () => {
-    console.log(`listeng on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`listeng on port ${PORT}`);
 });
 
 
