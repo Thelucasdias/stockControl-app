@@ -42,6 +42,18 @@ routes.post('/categories', async(req, res) => {
      } catch (error) {
         res.status(500).json({error: error.message});
     }
-})
-console.log(routes.get)
+});
+
+routes.delete('/categories/:Id', async (req, res) => {
+    try {
+        const categoryId = req.params.Id; 
+        const categoryRef = ref(database, `categories/${categoryId}`);
+        await set(categoryRef, null);
+        res.status(200).json({message: 'Categoria excluída com sucesso'})
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 export default routes;
