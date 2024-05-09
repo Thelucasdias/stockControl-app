@@ -32,6 +32,25 @@ routes.get('/categories', async(req, res) => {
     }
 });
 
+routes.get('/categories/:categoryId', async (req, res) => {
+    try {
+        const categoryId = req.params.categoryId;
+        const categoryRef = ref(database, `categories/${categoryId}`);
+        const categorySnapshot = await get(categoryRef);
+
+        if (categorySnapshot.exists()) {
+            const categoryData = categorySnapshot.val();
+            res.status(200).json({ id: categoryId, ...categoryData });
+        } else {
+            res.status(404).json({ message: 'Categoria não encontrada' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
 routes.post('/categories', async(req, res) => {
     try {
         const { name } = req.body;
@@ -41,6 +60,25 @@ routes.post('/categories', async(req, res) => {
         res.status(201).json({message: 'Categoria adicionada com sucesso'});
      } catch (error) {
         res.status(500).json({error: error.message});
+    }
+});
+
+routes.patch('/categories/:categoryId', async (req, res) => {
+    try {
+        const categoryId = req.params.categoryId;
+        const { name } = req.body;
+        const categoryRef = ref(database, `categories/${categoryId}`);
+        const categorySnapshot = await get(categoryRef);
+
+        if (categorySnapshot.exists()) {
+            
+            await set(categoryRef, { ...categorySnapshot.val(), name }); 
+            res.status(200).json({ message: 'Nome da categoria atualizado com sucesso' });
+        } else {
+            res.status(404).json({ message: 'Categoria não encontrada' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
