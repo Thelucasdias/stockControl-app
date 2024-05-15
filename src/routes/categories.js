@@ -4,13 +4,13 @@ import bodyParser from 'body-parser';
 import { push, ref, set, get } from "firebase/database";
 
 
-const routes = express();
+const categoryRoutes = express();
 
 
-routes.use(bodyParser.json())
-routes.use(bodyParser.urlencoded({ extended: true }))
+categoryRoutes.use(bodyParser.json())
+categoryRoutes.use(bodyParser.urlencoded({ extended: true }))
 
-routes.get('/categories', async(req, res) => {
+categoryRoutes.get('/categories', async(req, res) => {
     try {
         const categoriesRef = ref(database, 'categories');
         const snapshot = await get(categoriesRef);
@@ -32,7 +32,7 @@ routes.get('/categories', async(req, res) => {
     }
 });
 
-routes.get('/categories/:categoryId', async (req, res) => {
+categoryRoutes.get('/categories/:categoryId', async (req, res) => {
     try {
         const categoryId = req.params.categoryId;
         const categoryRef = ref(database, `categories/${categoryId}`);
@@ -51,7 +51,7 @@ routes.get('/categories/:categoryId', async (req, res) => {
 
 
 
-routes.post('/categories', async(req, res) => {
+categoryRoutes.post('/categories', async(req, res) => {
     try {
         const { name } = req.body;
         const categoriesRef = ref(database, 'categories');
@@ -63,7 +63,7 @@ routes.post('/categories', async(req, res) => {
     }
 });
 
-routes.patch('/categories/:categoryId', async (req, res) => {
+categoryRoutes.patch('/categories/:categoryId', async (req, res) => {
     try {
         const categoryId = req.params.categoryId;
         const { name } = req.body;
@@ -82,7 +82,7 @@ routes.patch('/categories/:categoryId', async (req, res) => {
     }
 });
 
-routes.delete('/categories/:Id', async (req, res) => {
+categoryRoutes.delete('/categories/:Id', async (req, res) => {
     try {
         const categoryId = req.params.Id; 
         const categoryRef = ref(database, `categories/${categoryId}`);
@@ -94,4 +94,4 @@ routes.delete('/categories/:Id', async (req, res) => {
 });
 
 
-export default routes;
+export default categoryRoutes;

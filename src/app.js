@@ -1,10 +1,10 @@
 import express from 'express';
-import routes from './routes/categories.js';
-
+import categoryRoutes from './routes/categories.js';
+import productRoutes from './routes/products.js';
 const server = express();
 
-server.use('/', routes)
-
+server.use('/', categoryRoutes)
+server.use('/', productRoutes)
 
 
 export default server
