@@ -49,6 +49,33 @@ categoryRoutes.get('/categories/:categoryId', async (req, res) => {
     }
 });
 
+categoryRoutes.get('/products/:categoryId', async (req, res) => {
+    try {
+        const categoryId = req.params.categoryId;
+        const productsRef = ref(database, 'products');
+        const snapshot = await get(productsRef);
+
+        if (snapshot.exists()){
+            const products = [];
+            snapshot.forEach((childSnapshot) => {
+                const productData = childSnapshot.val();
+                if (productData.categoryId === categoryId) {
+                    products.push({
+                        id: childSnapshot.key,
+                        ...productData
+                    });
+                }
+
+            });
+            res.status(200).json(products);
+        } else {
+            res.status(404).json({message: 'Nenhum produto encontrado'});
+        }
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+})
+
 
 
 categoryRoutes.post('/categories', async(req, res) => {

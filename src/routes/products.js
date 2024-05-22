@@ -26,30 +26,42 @@ productRoutes.post('/products', async (req, res) => {
     }
 });
 
-productRoutes.get('/products/:categoryId', async (req, res) => {
+productRoutes.get('/products', async (req, res) => {
     try {
-        const categoryId = req.params.categoryId;
-        const productsRef = ref(database, 'products');
+        const productsRef = ref(database, `products`);
         const snapshot = await get(productsRef);
 
-        if (snapshot.exists()){
-            const products = [];
+        if (snapshot.exists()) {
+            const productList = [];
             snapshot.forEach((childSnapshot) => {
-                const productData = childSnapshot.val();
-                if (productData.categoryId === categoryId) {
-                    products.push({
-                        id: childSnapshot.key,
-                        ...productData
-                    });
-                }
-
+                productList.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val(),
+                });
             });
-            res.status(200).json(products);
+            res.status(200).json(productList);
         } else {
-            res.status(404).json({message: 'Nenhum produto encontrado'});
+            res.status(404).json({ message: error.message});
         }
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
+    }
+})
+
+productRoutes.get('/products/:productId', async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        const productsRef = ref(database, `products/${productId}`);
+        const productsSnapshot = await get(productsRef);
+
+        if (productsSnapshot.exists()) {
+            const productData = productsSnapshot.val();
+            res.status(200).json({ id: productId, ...productData });
+        } else {
+            res.status(404).json({message: message})
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });        
     }
 })
 
