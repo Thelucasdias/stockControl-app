@@ -48,7 +48,7 @@ productRoutes.get('/products', async (req, res) => {
     }
 });
 
-productRoutes.get('/:productId', async (req, res) => {
+productRoutes.get('/product/:productId', async (req, res) => {
     try {
         const productId = req.params.productId;
         const productsRef = ref(database, `products/${productId}`);
@@ -65,6 +65,13 @@ productRoutes.get('/:productId', async (req, res) => {
     }
 });
 
-
+productRoutes.delete('/products/:Id', async (req, res) => {
+    try {
+        const productId = req.params.Id;
+        const productsRef = ref(database, `products`)
+    } catch (error) {
+        
+    }
+})
 
 export default productRoutes
