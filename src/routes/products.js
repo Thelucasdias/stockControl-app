@@ -46,9 +46,9 @@ productRoutes.get('/products', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-})
+});
 
-productRoutes.get('/products/:productId', async (req, res) => {
+productRoutes.get('/:productId', async (req, res) => {
     try {
         const productId = req.params.productId;
         const productsRef = ref(database, `products/${productId}`);
@@ -57,13 +57,13 @@ productRoutes.get('/products/:productId', async (req, res) => {
         if (productsSnapshot.exists()) {
             const productData = productsSnapshot.val();
             res.status(200).json({ id: productId, ...productData });
-        } else {
-            res.status(404).json({message: message})
+            } else {
+            res.status(404).json({message: "Nenhum produto encontrado"})
         }
     } catch (error) {
         res.status(500).json({ error: error.message });        
     }
-})
+});
 
 
 
