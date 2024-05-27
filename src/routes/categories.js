@@ -49,7 +49,7 @@ categoryRoutes.get('/categories/:categoryId', async (req, res) => {
     }
 });
 
-categoryRoutes.get('/products/:categoryId', async (req, res) => {
+categoryRoutes.get('/:categoryId/products', async (req, res) => {
     try {
         const categoryId = req.params.categoryId;
         const productsRef = ref(database, 'products');
@@ -119,6 +119,7 @@ categoryRoutes.delete('/categories/:Id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 
 export default categoryRoutes;

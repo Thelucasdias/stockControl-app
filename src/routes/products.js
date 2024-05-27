@@ -68,9 +68,29 @@ productRoutes.get('/product/:productId', async (req, res) => {
 productRoutes.delete('/products/:Id', async (req, res) => {
     try {
         const productId = req.params.Id;
-        const productsRef = ref(database, `products`)
+        const productsRef = ref(database, `products/${productId}`);
+        await set(productsRef, null);
+        res.status(200).json({message: 'Produto excluído com sucesso!'});
     } catch (error) {
-        
+        res.status(500).json({error: error.message});
+    }
+})
+
+productRoutes.patch('/products/:productId', async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        const { name, price, quantity } = req.body;
+        const productsRef = ref(database, `products/${productId}`);
+        const productsSnapshot = await get(productsRef);
+
+        if (productsSnapshot.exists()) {
+            await set(productsRef, {...productsSnapshot.val(), name, price, quantity});
+            res.status(200).json({message: 'Produto esditado com sucesso!'});
+        } else {
+            res.status(404).json({message: 'Produto nao encontrado'})
+        }        
+    } catch (error) {
+        res.status(500).json({error: error.message});        
     }
 })
 
