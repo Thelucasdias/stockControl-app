@@ -10,29 +10,43 @@ productRoutes.use(bodyParser.urlencoded({ extended: true }));
 
 productRoutes.post('/products', async (req, res) => {
     try {
-        let {name, price, quantity, categoryId, totalValue} = req.body;
+        let {name, price, quantity, categoryId} = req.body;
         price = parseFloat(price);
         quantity = parseInt(quantity);
         
         if (isNaN(price) || isNaN(quantity)) {
             return res.status(400).json({ message: 'Price e Quantity devem ser números válidos' });
         }
-        totalValue = price * quantity;
+        
         const categoriesRef = ref(database, `categories/${categoryId}`);
         const categorySnapshot = await get(categoriesRef);
         if (!categorySnapshot.exists()) {
             return res.status(404).json({message: 'Categoria nao encontrada'})
         }
-        const productsRef = ref(database, `products`);
+        const productsRef = ref(database, 'products');
+        const productsSnapshot = await get(productsRef);
+        let productExists = false;
+
+        productsSnapshot.forEach((childSnapshot) => {
+            const product = childSnapshot.val();
+            if (product.name === name && product.categoryId === categoryId) {
+                productExists = true;
+            }
+        });
+
+        if (productExists) {
+            return res.status(409).json({ message: 'Produto já existe na categoria especificada' });
+        }
+
         const newProductsRef = push(productsRef);
-        await set(newProductsRef, {name, price, quantity, categoryId, totalValue});
-                
-        res.status(201).json({message: 'Produto adicionado com sucesso', productId: newProductsRef.key});
+        let totalValue = price * quantity;
+        await set(newProductsRef, { name, price, quantity, categoryId, totalValue });
+        
+        res.status(201).json({ message: 'Produto adicionado com sucesso', productId: newProductsRef.key });
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 });
-
 productRoutes.get('/products', async (req, res) => {
     try {
         const productsRef = ref(database, `products`);
