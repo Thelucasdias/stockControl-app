@@ -10,7 +10,14 @@ productRoutes.use(bodyParser.urlencoded({ extended: true }));
 
 productRoutes.post('/products', async (req, res) => {
     try {
-        const {name, price, quantity, categoryId} = req.body;
+        let {name, price, quantity, categoryId, totalValue} = req.body;
+        price = parseFloat(price);
+        quantity = parseInt(quantity);
+        
+        if (isNaN(price) || isNaN(quantity)) {
+            return res.status(400).json({ message: 'Price e Quantity devem ser números válidos' });
+        }
+        totalValue = price * quantity;
         const categoriesRef = ref(database, `categories/${categoryId}`);
         const categorySnapshot = await get(categoriesRef);
         if (!categorySnapshot.exists()) {
@@ -18,8 +25,8 @@ productRoutes.post('/products', async (req, res) => {
         }
         const productsRef = ref(database, `products`);
         const newProductsRef = push(productsRef);
-        await set(newProductsRef, {name, price, quantity, categoryId});
-
+        await set(newProductsRef, {name, price, quantity, categoryId, totalValue});
+                
         res.status(201).json({message: 'Produto adicionado com sucesso', productId: newProductsRef.key});
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -44,7 +51,7 @@ productRoutes.get('/products', async (req, res) => {
             res.status(404).json({ message: error.message});
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
