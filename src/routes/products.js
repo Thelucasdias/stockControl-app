@@ -33,15 +33,12 @@ productRoutes.post('/products', async (req, res) => {
                 productExists = true;
             }
         });
-
         if (productExists) {
             return res.status(409).json({ message: 'Produto já existe na categoria especificada' });
         }
-
         const newProductsRef = push(productsRef);
         let totalValue = price * quantity;
-        await set(newProductsRef, { name, price, quantity, categoryId, totalValue });
-        
+        await set(newProductsRef, { name, price, quantity, categoryId, totalValue });        
         res.status(201).json({ message: 'Produto adicionado com sucesso', productId: newProductsRef.key });
     } catch (error) {
         res.status(500).json({ error: error.message });
