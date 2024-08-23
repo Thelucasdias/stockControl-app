@@ -1,9 +1,18 @@
 import styled from 'styled-components/native'
-
-const Title = styled.Text`
-    font-size: 2rem;
+import React from 'react';
+const StyledTitle = styled.Text`
+    font-size: 32px;
     color: white;
-    margin-bottom: 2.5rem;
+    margin-bottom: 40px;
+    margin-top: 120px;
+    
 `;
+interface TitleProps {
+    children: React.ReactNode;
+}
+const Title: React.FC<TitleProps> = ({ children }) => {
+    return <StyledTitle>{children}</StyledTitle>;
+  };
+  
 
 export default Title;

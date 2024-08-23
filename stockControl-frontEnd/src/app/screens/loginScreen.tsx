@@ -13,14 +13,17 @@ const loginScreen = () => {
 
     return (
         <Container>
-            <Title>Stock Control</Title>
-            <Logo source={require('@/logoImagePng/stock-logo.png')} />
-            <Input placeholder="Username" placeholderTextColor="#999" />
-            <Input placeholder="Password" placeholderTextColor="#999" secureTextEntry />
-            <RegisterText>Register</RegisterText>
-            <LoginButton title="Login" onPress={handleLoginPress} />
+             <Title>Stock Control</Title>
+           
         </Container>
     );
 };
 
 export default loginScreen;
+
+/*          <Title>Stock Control</Title>
+            <Logo source={require('@/logoImagePng/stock-logo.png')} />
+            <Input placeholder="Username" placeholderTextColor="#999" />
+            <Input placeholder="Password" placeholderTextColor="#999" secureTextEntry />
+            <RegisterText>Register</RegisterText>
+            <LoginButton title="Login" onPress={handleLoginPress} />*/

@@ -1,6 +1,8 @@
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+import { useRouter } from 'expo-router';
 
 export default function Index() {
+  const router = useRouter();
   return (
     <View
       style={{
@@ -10,6 +12,10 @@ export default function Index() {
       }}
     >
       <Text>Test</Text>
+      <Button
+        title="Login"
+        onPress={() => router.push('/screens/loginScreen')}
+      />
     </View>
   );
 }
