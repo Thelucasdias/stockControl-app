@@ -1,10 +1,11 @@
 import styled from 'styled-components/native'
 import React from 'react';
 const StyledTitle = styled.Text`
-    font-size: 32px;
+    font-size: 42px;
     color: white;
     margin-bottom: 40px;
-    margin-top: 120px;
+    margin-top: 180px;
+    align-items: center;
     
 `;
 interface TitleProps {
