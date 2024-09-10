@@ -16,15 +16,10 @@ export default function index() {
              <Logo source={require("../../logoStock/logo.png")}></Logo>
              <Input placeholder="E-mail"/>
              <InputPass placeholder="Senha"/>
-             <Link href="/_sitemap">
+             <Link href="/screens/register">
         <RegisterText>Registre-se</RegisterText>
              </Link>
+             <LoginButton title="Login"/>
         </Container>
     )}
 
-/*          
-            <Logo source={require('@/logoImagePng/stock-logo.png')} />
-            <Input placeholder="Username" placeholderTextColor="#999" />
-            <Input placeholder="Password" placeholderTextColor="#999" secureTextEntry />
-            <RegisterText>Register</RegisterText>
-            <LoginButton title="Login" onPress={handleLoginPress} />*/

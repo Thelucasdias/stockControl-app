@@ -1,28 +1,39 @@
 import styled from 'styled-components/native';
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const Button = styled.TouchableOpacity`
-    width: 100%;
-    height: 3.125rem;
+    width: 30%;
+    height: 50px;
     background-color: #4943FA;
-    border-radius: 1.65rem;
+    margin-top: 50px;
+    border-radius: 26px;
     justify-content: center;
     align-items: center;
 `
-const ButtonText = styled.Text`
+const LoginText = styled.Text`
     color: white;
-    font-size: 1rem;
+    font-size: 16px;
 `;
 
-interface LoginButtonProps {
+interface LoginButtonProps extends TouchableOpacityProps {
     title: string;
-    onPress: () => void;
-}
+  }
+  
 
-const LoginButton : React.FC<LoginButtonProps> = ({title, onPress}) => (
-    <Button onPress={onPress}>
-        <ButtonText>{title}</ButtonText>
+const LoginButton : React.FC<LoginButtonProps> = ({onPress, title}) => {
+    const router = useRouter();
+
+  const handlePress = () => {
+    router.push('/screens/home');
+  };
+
+  return (
+    <Button onPress={handlePress} {...onPress}>
+      <LoginText>{title}</LoginText>
     </Button>
-)
+  );
+};
 
 export default LoginButton;
