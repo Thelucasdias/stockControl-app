@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "@/src/components/Container";
-import Title from "@/src/components/Title";
+import Container from "@/src/components/login/Container";
+import Title from "@/src/components/login/Title";
 
 import { useRouter } from "expo-router";
 

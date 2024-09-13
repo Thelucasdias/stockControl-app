@@ -5,7 +5,6 @@ const Container = styled.View `
     justify-content: flex-start;
     background-color: #5C56FB;
     align-items: center;
-    padding: 1.25rem;
 `;
 
 export default Container;
