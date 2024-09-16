@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import { Image, TextInput } from 'react-native';
 import React from "react";
 import Background from "../Background";
 
@@ -18,19 +17,22 @@ const ToolbarContainer = styled.View`
 background-color: #5C56FB;
 height: 17%;
 width: 100%;
-justify-content: space-between;
+flex-direction: row;
+align-items: center;
 `
 const HamburguerMenu = styled.Image`
-width: 40px;
-height: 40px;
-margin: 45px 0 0 20px;
+width: 45px;
+height: 45px;
+display: flex;
+margin: 40px 0 0 20px
 `
 const Title = styled.Text`
 color: #ffffff;
 font-size: 36px;
 font-weight: bold;
 text-align: center;
-padding: 0 0 50px 0;
+margin: 40px 0 0 35px;
+display: flex;
 `
 
 export default Toolbar;
