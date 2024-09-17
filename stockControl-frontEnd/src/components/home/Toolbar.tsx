@@ -2,18 +2,18 @@ import styled from "styled-components/native";
 import React from "react";
 import Background from "../Background";
 
-const Toolbar: React.FC = () => {
+const ToolBar: React.FC = () => {
     return (
         <Background>
-            <ToolbarContainer>
+            <ToolBarContainer>
                 <HamburguerMenu source={require('../../assets/images/menu-icon.png')}/>
                 <Title>Stock Control</Title>
-            </ToolbarContainer>
+            </ToolBarContainer>
         </Background>
     );
 };
 
-const ToolbarContainer = styled.View`
+const ToolBarContainer = styled.View`
 background-color: #5C56FB;
 height: 17%;
 width: 100%;
@@ -24,15 +24,15 @@ const HamburguerMenu = styled.Image`
 width: 45px;
 height: 45px;
 display: flex;
-margin: 40px 0 0 20px
+margin: 20px 0 0 20px
 `
 const Title = styled.Text`
 color: #ffffff;
 font-size: 36px;
 font-weight: bold;
 text-align: center;
-margin: 40px 0 0 35px;
+margin: 20px 0 0 35px;
 display: flex;
 `
 
-export default Toolbar;
+export default ToolBar;

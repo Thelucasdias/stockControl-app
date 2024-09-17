@@ -11,5 +11,11 @@ const Input = styled(TextInput)`
     font-size: 18px;
     padding: 0 25px;
 `;
+const InputSearch = styled(TextInput)`
+    font-size: 18px;
+    width:100%;
+    height:50px;
+    background-color:white;
+`
 
-export default Input;
+export  {Input, InputSearch};

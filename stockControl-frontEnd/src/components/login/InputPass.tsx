@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input';
+import {Input} from './Input';
 import { TextInputProps, TextInput } from 'react-native';
 import { ExecutionProps } from 'styled-components/native';
 import { FastOmit, Substitute } from 'styled-components/native/dist/types';
