@@ -13,9 +13,11 @@ const Input = styled(TextInput)`
 `;
 const InputSearch = styled(TextInput)`
     font-size: 18px;
+    margin-top: -340px;
     width:100%;
     height:50px;
     background-color:white;
+    padding: 0 0 0 20px;
 `
 
 export  {Input, InputSearch};
