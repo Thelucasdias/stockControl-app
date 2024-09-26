@@ -2,8 +2,11 @@ import React from "react";
 import { useRouter } from "expo-router";
 import Toolbar from "@/src/components/home/Toolbar";
 import  SearchBar  from "@/src/components/home/SearchBar";
-import { TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import Background from "@/src/components/Background";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+console.log(wp('100%'));
+console.log(hp('100%'));
 
 
 

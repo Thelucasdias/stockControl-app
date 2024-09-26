@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { TextInput } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 const Input = styled(TextInput)`
@@ -14,8 +15,8 @@ const Input = styled(TextInput)`
 `;
 const InputSearch = styled(TextInput)`
     font-size: 18px;    
-    width:100%;
-    height:50px;
+    width: ${() => `${wp('100%')}px`};
+    height: ${() => `${hp('6.25%')}px`};
     background-color:white;
     padding: 0 0 0 20px;    
 `
