@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import React from "react";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ToolBar: React.FC = () => {
     return (
@@ -14,23 +15,23 @@ const ToolBar: React.FC = () => {
 
 const ToolBarContainer = styled.View`
 background-color: #5C56FB;
-height: 15%;
-width: 100%;
+height: ${() => `${hp('15%')}px`};
+width:  ${() => `${wp('100%')}px`};
 flex-direction: row;
 align-items: center;
 `
 const HamburguerMenu = styled.Image`
-width: 40px;
-height: 40px;
+width:  ${() => `${wp('10%')}px`};
+height:  ${() => `${hp('5%')}px`};
 display: flex;
-margin: 45px 0 0 20px
+margin:  ${() => `${wp('12%')}px`} 0 0  ${() => `${wp('5')}px`};
 `
 const Title = styled.Text`
 color: #ffffff;
-font-size: 32px;
+font-size:  ${() => `${hp('4%')}px`};
 font-weight: bold;
 text-align: center;
-margin: 45px 0 0 45px;
+margin: ${() => `${hp('5.63%')}px`} 0 0 ${() => `${hp('5.63%')}px`};
 display: flex;
 `
 
