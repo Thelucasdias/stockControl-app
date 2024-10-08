@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import React from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 const StyledTitle = styled.Text`
     font-size: ${() =>`${hp('6%')}px`};
     color: white;
